@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="game-result">
+        <div class="game-result__info"></div>
+
+        <div class="game-result__options">
+          <p>Snake speed</p>
+          <select name="gameSpeed" id="gameSpeed" class="game-result__select">
+            <option class="game-result__option" value="slow">Slow</option>
+            <option class="game-result__option" value="normal">Normal</option>
+            <option class="game-result__option" value="fast">Fast</option>
+            <option class="game-result__option" value="vFast">
+              Speed of the light
+            </option>
+          </select>
+          <p>How many segments adds food?</p>
+          <select name="food" id="food" class="game-result__select">
+            <option class="game-result__option" value="1">+1</option>
+            <option class="game-result__option" value="2">+2</option>
+            <option class="game-result__option" value="3">+3</option>
+          </select>
+        </div>
+        <div class="game-result__score">
+          <p>SCORE</p>
+          <span class="game-result__number">0</span>
+        </div>
+        <button class="button">Start game</button>
+      </div>
+      <div class="game-container">
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+        <div class="game-container__tile"></div>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
