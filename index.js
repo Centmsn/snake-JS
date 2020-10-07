@@ -4,8 +4,9 @@ let gameId = "";
 let score = 0;
 let highScore = 0;
 let gameSpeed = 250;
+let darkMode = false;
 let allowDirectionChange = true;
-const startBtn = document.querySelector(".button");
+const startBtn = document.querySelector("#start-game");
 const gameTiles = document.querySelectorAll(".game-container__tile");
 const gameContainer = document.querySelector(".game-container");
 
@@ -23,6 +24,10 @@ const endGame = () => {
   const modal = document.createElement("div");
   modal.classList.add("modal");
 
+  if (darkMode) {
+    modal.classList.add("modal--dark");
+  }
+
   const info = document.createElement("p");
 
   const hScoreBox = document.querySelector(".game-result__high-score");
@@ -38,6 +43,31 @@ const endGame = () => {
   modal.appendChild(info);
 
   gameContainer.appendChild(modal);
+};
+
+const toggleDarkmode = (e) => {
+  const modal = document.querySelector(".modal");
+  const options = document.querySelector(".game-result");
+
+  if (e.target.value === "dark") {
+    e.target.value = "light";
+    e.target.textContent = "Turn on the lights";
+    gameContainer.classList.add("game-container--dark");
+    options.classList.add("game-result--dark");
+    if (modal) {
+      modal.classList.add("modal--dark");
+    }
+    darkMode = true;
+  } else {
+    e.target.value = "dark";
+    e.target.textContent = "Turn off the lights";
+    gameContainer.classList.remove("game-container--dark");
+    options.classList.remove("game-result--dark");
+    if (modal) {
+      modal.classList.remove("modal--dark");
+    }
+    darkMode = false;
+  }
 };
 
 const updateScore = () => {
@@ -63,11 +93,15 @@ const updateScore = () => {
 
 const drawSnake = () => {
   gameTiles.forEach((tile, index) => {
+    //   clear current position
     tile.classList.remove("snake");
     tile.classList.remove("snake-head");
+
+    // draw body
     if (snake.includes(index)) {
       tile.classList.add("snake");
 
+      //   draw head
       index === snake[snake.length - 1]
         ? tile.classList.add("snake-head")
         : null;
@@ -86,6 +120,7 @@ const drawApple = () => {
 };
 
 const expandSnake = () => {
+  // number depends on user select
   const segments = parseInt(document.querySelector("#food").value);
   if (segments === 1) {
     snake.unshift(snake[snake.length - 1]);
@@ -100,8 +135,9 @@ const expandSnake = () => {
   }
 };
 
-// decode pressed key
 const getDirection = (e) => {
+  // decode pressed key
+  // block 180deg turn
   if (allowDirectionChange) {
     allowDirectionChange = false;
     if (e.keyCode === 39 && direction !== "left") {
@@ -188,6 +224,10 @@ const showCountdown = () => {
   const modal = document.createElement("div");
   modal.classList.add("modal");
 
+  if (darkMode) {
+    modal.classList.add("modal--dark");
+  }
+
   gameContainer.appendChild(modal);
   modal.textContent = "3";
   setTimeout(() => (modal.textContent = "2"), 1000);
@@ -216,7 +256,7 @@ const startGame = () => {
   //   set game speed
   switch (speed.value) {
     case "slow":
-      gameSpeed = 300;
+      gameSpeed = 200;
       break;
     case "normal":
       gameSpeed = 150;
@@ -248,3 +288,4 @@ const startGame = () => {
   }, 3000);
 };
 startBtn.addEventListener("click", startGame);
+document.querySelector("#darkmode").addEventListener("click", toggleDarkmode);
