@@ -19,12 +19,14 @@ const endGame = () => {
 
   document.querySelector(".snake-head").classList.add("collision");
 
+  //   display end game info
   const modal = document.createElement("div");
   modal.classList.add("modal");
 
   const info = document.createElement("p");
 
   const hScoreBox = document.querySelector(".game-result__high-score");
+  //   update highscore
   if (highScore > parseInt(hScoreBox.textContent)) {
     info.innerHTML = `Game over<br>Score: ${score}<br>New high score!`;
     hScoreBox.textContent = highScore;
@@ -40,7 +42,8 @@ const endGame = () => {
 
 const updateScore = () => {
   const food = parseInt(document.querySelector("#food").value);
-  const speed = gameSpeed * 0.01;
+  //   if highest speed
+  const speed = gameSpeed === 50 ? gameSpeed - 60 : gameSpeed * 0.01;
   switch (food) {
     case 1:
       score += 4 - speed;
@@ -116,7 +119,19 @@ const getDirection = (e) => {
 const detectCollision = () => {
   // wall collision
   const snakeHead = snake[snake.length - 1];
+  const leftWall = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
+  const rightWall = [9, 19, 29, 39, 49, 59, 69, 79, 89, 99];
   if (snakeHead > 100 || snakeHead < 0) {
+    clearInterval(gameId);
+    endGame();
+    return false;
+  }
+
+  if (rightWall.includes(snakeHead) && direction === "left") {
+    clearInterval(gameId);
+    endGame();
+    return false;
+  } else if (leftWall.includes(snakeHead) && direction === "right") {
     clearInterval(gameId);
     endGame();
     return false;
@@ -169,6 +184,7 @@ const moveSnake = () => {
 };
 
 const showCountdown = () => {
+  // before game start
   const modal = document.createElement("div");
   modal.classList.add("modal");
 
