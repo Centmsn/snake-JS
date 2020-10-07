@@ -1,3 +1,7 @@
+$snake-col: rgb(131, 199, 28);
+$snake-head-col: rgb(99, 201, 99);
+$red-col: rgb(182, 7, 7);
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +17,7 @@
   align-items: center;
   flex-wrap: wrap;
   margin: auto;
-  background: url("../background.png");
+  background-color: rgb(68, 68, 68);
 }
 
 .game-container {
@@ -61,15 +65,15 @@
 }
 
 .snake {
-  background-color: rgb(131, 199, 28);
+  background-color: $snake-col;
 }
 
 .snake-head {
-  background-color: rgb(99, 201, 99);
+  background-color: $snake-head-col;
 }
 
 .apple {
-  background-color: red;
+  background-color: $red-col;
 }
 
 .button {
@@ -80,7 +84,7 @@
   background-color: transparent;
 
   &:hover {
-    color: red;
+    color: $red-col;
   }
 }
 
@@ -90,7 +94,23 @@
   position: absolute;
   font-size: 10rem;
   text-align: center;
-  line-height: 600px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  &__img {
+    width: 25%;
+  }
+
+  &__info {
+    flex-basis: 100%;
+    font-size: 2rem;
+    padding: 10px 0;
+    line-height: calc(2rem + 5px);
+    background-color: rgba(0, 0, 0, 0.219);
+  }
 }
 
 .collision {
@@ -99,12 +119,12 @@
 
 @keyframes collision {
   0% {
-    background-color: rgb(99, 201, 99);
+    background-color: $snake-head-col;
   }
   50% {
-    background-color: red;
+    background-color: $red-col;
   }
   100% {
-    background-color: rgb(99, 201, 99);
+    background-color: $snake-head-col;
   }
 }

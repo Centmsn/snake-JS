@@ -2,12 +2,14 @@ let snake = [1, 2, 3];
 let direction = "right";
 let gameId = "";
 let score = 0;
+let highScore = 0;
 let gameSpeed = 250;
+let allowDirectionChange = true;
 const startBtn = document.querySelector(".button");
 const gameTiles = document.querySelectorAll(".game-container__tile");
+const gameContainer = document.querySelector(".game-container");
 
 const endGame = () => {
-  document.querySelector(".game-result__info").textContent = "Game over!";
   startBtn.removeAttribute("disabled");
   document.querySelector("#food").removeAttribute("disabled");
   document.querySelector("#gameSpeed").removeAttribute("disabled");
@@ -16,6 +18,24 @@ const endGame = () => {
   });
 
   document.querySelector(".snake-head").classList.add("collision");
+
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+
+  const info = document.createElement("p");
+
+  const hScoreBox = document.querySelector(".game-result__high-score");
+  if (highScore > parseInt(hScoreBox.textContent)) {
+    info.innerHTML = `Game over<br>Score: ${score}<br>New high score!`;
+    hScoreBox.textContent = highScore;
+  } else {
+    info.innerHTML = `Game over<br>Score: ${score}`;
+  }
+
+  info.classList.add("modal__info");
+  modal.appendChild(info);
+
+  gameContainer.appendChild(modal);
 };
 
 const updateScore = () => {
@@ -32,7 +52,10 @@ const updateScore = () => {
       score += 13 - speed;
       break;
   }
-  document.querySelector(".game-result__number").textContent = score;
+
+  const scoreBox = document.querySelector(".game-result__current-score");
+  scoreBox.textContent = score;
+  score > highScore ? (highScore = score) : null;
 };
 
 const drawSnake = () => {
@@ -47,6 +70,7 @@ const drawSnake = () => {
         : null;
     }
   });
+  allowDirectionChange = true;
 };
 
 const drawApple = () => {
@@ -73,19 +97,24 @@ const expandSnake = () => {
   }
 };
 
+// decode pressed key
 const getDirection = (e) => {
-  if (e.keyCode === 39 && direction !== "left") {
-    direction = "right";
-  } else if (e.keyCode === 37 && direction !== "right") {
-    direction = "left";
-  } else if (e.keyCode === 40 && direction !== "up") {
-    direction = "down";
-  } else if (e.keyCode === 38 && direction !== "down") {
-    direction = "up";
+  if (allowDirectionChange) {
+    allowDirectionChange = false;
+    if (e.keyCode === 39 && direction !== "left") {
+      direction = "right";
+    } else if (e.keyCode === 37 && direction !== "right") {
+      direction = "left";
+    } else if (e.keyCode === 40 && direction !== "up") {
+      direction = "down";
+    } else if (e.keyCode === 38 && direction !== "down") {
+      direction = "up";
+    }
   }
 };
 
 const detectCollision = () => {
+  // wall collision
   const snakeHead = snake[snake.length - 1];
   if (snakeHead > 100 || snakeHead < 0) {
     clearInterval(gameId);
@@ -93,6 +122,7 @@ const detectCollision = () => {
     return false;
   }
 
+  //   body collision
   if (gameTiles[snakeHead].classList.contains("snake")) {
     clearInterval(gameId);
     endGame();
@@ -102,9 +132,10 @@ const detectCollision = () => {
   //   food collision
   if (gameTiles[snakeHead].classList.contains("apple")) {
     gameTiles[snakeHead].classList.remove("apple");
+    expandSnake();
     drawApple();
     updateScore();
-    expandSnake();
+
     return true;
   }
 
@@ -141,14 +172,11 @@ const showCountdown = () => {
   const modal = document.createElement("div");
   modal.classList.add("modal");
 
-  document.querySelector(".game-container").appendChild(modal);
+  gameContainer.appendChild(modal);
   modal.textContent = "3";
   setTimeout(() => (modal.textContent = "2"), 1000);
   setTimeout(() => (modal.textContent = "1"), 2000);
-  setTimeout(
-    () => document.querySelector(".game-container").removeChild(modal),
-    3000
-  );
+  setTimeout(() => gameContainer.removeChild(modal), 3000);
 };
 
 const startGame = () => {
@@ -157,10 +185,15 @@ const startGame = () => {
   snake = [1, 2, 3];
   direction = "right";
   score = 0;
-  document.querySelector(".game-result__number").textContent = score;
+  document.querySelector(".game-result__current-score").textContent = score;
   gameTiles.forEach((tile) =>
     tile.classList.remove("snake", "snake-head", "collision")
   );
+
+  const modal = document.querySelector(".modal");
+  if (modal) {
+    gameContainer.removeChild(modal);
+  }
 
   const speed = document.querySelector("#gameSpeed");
 
