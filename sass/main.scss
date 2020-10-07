@@ -61,7 +61,11 @@
 }
 
 .snake {
-  background-color: greenyellow;
+  background-color: rgb(131, 199, 28);
+}
+
+.snake-head {
+  background-color: rgb(99, 201, 99);
 }
 
 .apple {
@@ -77,5 +81,30 @@
 
   &:hover {
     color: red;
+  }
+}
+
+.modal {
+  width: 600px;
+  height: 600px;
+  position: absolute;
+  font-size: 10rem;
+  text-align: center;
+  line-height: 600px;
+}
+
+.collision {
+  animation: collision 750ms 0s 3 forwards;
+}
+
+@keyframes collision {
+  0% {
+    background-color: rgb(99, 201, 99);
+  }
+  50% {
+    background-color: red;
+  }
+  100% {
+    background-color: rgb(99, 201, 99);
   }
 }
