@@ -10,6 +10,15 @@ const startBtn = document.querySelector("#start-game");
 const gameTiles = document.querySelectorAll(".game-container__tile");
 const gameContainer = document.querySelector(".game-container");
 
+const displayWelcomeScreen = () => {
+  const modal = createModal();
+
+  modal.innerHTML =
+    "<p class='modal__info modal__info--transparent'>Use arrows to control snake</p><br><span class='modal__info--small'>&#8593;</span><span class='modal__info--small rotate-left'>&#8593;</span><span class='modal__info--small rotate-right'>&#8593;</span><span class='modal__info--small'>&#8595;</span>";
+
+  gameContainer.appendChild(modal);
+};
+
 const endGame = () => {
   startBtn.removeAttribute("disabled");
   document.querySelector("#food").removeAttribute("disabled");
@@ -79,10 +88,10 @@ const updateScore = () => {
       score += 4 - speed;
       break;
     case 2:
-      score += 9 - speed;
+      score += 8 - speed;
       break;
     case 3:
-      score += 13 - speed;
+      score += 12 - speed;
       break;
   }
 
@@ -219,14 +228,20 @@ const moveSnake = () => {
   }
 };
 
-const showCountdown = () => {
-  // before game start
+const createModal = () => {
   const modal = document.createElement("div");
   modal.classList.add("modal");
 
   if (darkMode) {
     modal.classList.add("modal--dark");
   }
+
+  return modal;
+};
+
+const showCountdown = () => {
+  // before game start
+  const modal = createModal();
 
   gameContainer.appendChild(modal);
   modal.textContent = "3";
@@ -236,12 +251,14 @@ const showCountdown = () => {
 };
 
 const startGame = () => {
-  // reset game before start
+  // disabled button
   startBtn.setAttribute("disabled", "true");
+  // reset game before start
   snake = [1, 2, 3];
   direction = "right";
   score = 0;
   document.querySelector(".game-result__current-score").textContent = score;
+  // clean game-container
   gameTiles.forEach((tile) =>
     tile.classList.remove("snake", "snake-head", "collision")
   );
@@ -289,3 +306,4 @@ const startGame = () => {
 };
 startBtn.addEventListener("click", startGame);
 document.querySelector("#darkmode").addEventListener("click", toggleDarkmode);
+window.addEventListener("DOMContentLoaded", displayWelcomeScreen);

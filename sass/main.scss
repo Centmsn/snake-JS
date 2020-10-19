@@ -88,6 +88,10 @@ $main-col: rgb(253, 198, 15);
   &__option {
     flex-basis: 100%;
   }
+
+  &__text {
+    flex-basis: 100%;
+  }
 }
 
 .snake {
@@ -109,6 +113,13 @@ $main-col: rgb(253, 198, 15);
   color: $red-col;
   border: none;
   background-color: transparent;
+  outline: none;
+
+  &--small {
+    font-size: 1rem;
+    flex-basis: 90%;
+    margin-top: 20px;
+  }
 
   &:hover {
     color: $main-col;
@@ -146,6 +157,15 @@ $main-col: rgb(253, 198, 15);
     line-height: calc(2rem + 5px);
     background-color: rgba(0, 0, 0, 0.219);
   }
+
+  &__info--transparent {
+    background-color: transparent;
+  }
+
+  &__info--small {
+    font-size: 1.5rem;
+    flex-basis: 100%;
+  }
 }
 
 .collision {
@@ -162,4 +182,14 @@ $main-col: rgb(253, 198, 15);
   100% {
     background-color: $snake-head-col;
   }
+}
+
+.rotate-left {
+  transform: rotate(-90deg);
+  flex-basis: 50%;
+}
+
+.rotate-right {
+  transform: rotate(90deg);
+  flex-basis: 50%;
 }
